@@ -28,7 +28,8 @@ class AuthServiceProvider extends ServiceProvider
             return (new MailMessage)
             ->subject('Veriicar Cuenta')
             ->line('Tu cuenta ya esta casi lista, solo debes presionar el enlace a continuación')
-            ->action('Confirmar Cuenta', $url);
+            ->action('Confirmar Cuenta', $url)
+            ->line('Si no creaste esta cuenta, puedes ignorar este mensaje');
         });
     }
 }
