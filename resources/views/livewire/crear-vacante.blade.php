@@ -86,7 +86,14 @@
             class="block mt-1 w-full" 
             type="file" 
             wire:model="imagen" 
+            accept="image/*"
           />
+          <div class="my-5">
+            @if (isset($imagen))
+                Imagen:
+                <img src="{{ $imagen->temporaryUrl() }}" alt="">
+            @endif
+          </div>
         <x-input-error :messages="$errors->get('imagen')" class="mt-2" />
     </div>
 
