@@ -26,6 +26,11 @@ class CrearVacante extends Component
         'imagen' => 'required',
     ];
 
+    public function crearVacante()
+    {
+        $this->validate();
+    }
+
     public function render()
     {
         // Consultar BD 

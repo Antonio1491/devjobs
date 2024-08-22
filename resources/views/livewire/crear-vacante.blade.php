@@ -1,4 +1,4 @@
-<form class="md:w-1/2 space-y-5">
+<form class="md:w-1/2 space-y-5" wire:submit.prevent="crearVacante">
 
     <div>
         <x-input-label for="titulo" :value="__('Título Vacante')" />
@@ -16,10 +16,10 @@
     <div>
         <x-input-label for="salario" :value="__('Salario Mensual')" />
         <select 
-            name="salario" 
+            wire:model="salario"
             id="salario"
             class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-lime-500 dark:focus:border-lime-600 focus:ring-lime-500 dark:focus:ring-lime-600 rounded-md shadow-sm w-full">
-                <option value="" wire:model="salario">-- Seleccione --</option>
+                <option value="" >-- Seleccione --</option>
                 @foreach($salarios as $salario)
                     <option value="{{ $salario->id }}">{{ $salario->salario }}</option>
                 @endforeach
@@ -87,7 +87,7 @@
             type="file" 
             wire:model="imagen" 
           />
-        <x-input-error :messages="$errors->get('titulo')" class="mt-2" />
+        <x-input-error :messages="$errors->get('imagen')" class="mt-2" />
     </div>
 
     <x-primary-button class=" dark:bg-lime-600 dark:text-white dark:hover:bg-lime-700 w-full justify-center">
