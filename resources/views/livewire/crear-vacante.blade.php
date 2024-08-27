@@ -88,7 +88,7 @@
             wire:model="imagen" 
             accept="image/*"
           />
-          <div class="my-5">
+          <div class="my-5 w-80">
             @if (isset($imagen))
                 Imagen:
                 <img src="{{ $imagen->temporaryUrl() }}" alt="">
