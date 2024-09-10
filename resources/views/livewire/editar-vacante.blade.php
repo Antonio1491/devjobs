@@ -1,4 +1,4 @@
-<form class="md:w-1/2 space-y-5" wire:submit.prevent="crearVacante">
+<form class="md:w-1/2 space-y-5" wire:submit.prevent="editarVacante">
 
     <div>
         <x-input-label for="titulo" :value="__('Título Vacante')" />
@@ -104,7 +104,7 @@
     </div>
 
     <x-primary-button class=" dark:bg-lime-600 dark:text-white dark:hover:bg-lime-700 w-full justify-center">
-        {{ __('Crear Vacante') }}
+        {{ __('Guardar Cambios') }}
     </x-primary-button>
 
 </form>
