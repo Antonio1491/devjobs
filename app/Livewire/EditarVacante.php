@@ -7,6 +7,7 @@ use App\Models\Vacante;
 use Livewire\Component;
 use App\Models\Categoria;
 use Illuminate\Support\Carbon;
+use Livewire\WithFileUploads;
 
 class EditarVacante extends Component
 {
@@ -18,7 +19,9 @@ class EditarVacante extends Component
     public $ultimo_dia;
     public $descripcion;
     public $imagen;
+    public $imagen_nueva;
 
+    use WithFileUploads;
     // $id esta reservado para uso interno de livewire
 
     protected $rules = [
@@ -27,7 +30,8 @@ class EditarVacante extends Component
         'categoria' => 'required',
         'empresa' => 'required',
         'ultimo_dia' => 'required',
-        'descripcion' => 'required'
+        'descripcion' => 'required',
+        'imagen_nueva' => 'nullable|image|max:1024',
     ];
  
     public function mount(Vacante $vacante)
@@ -47,7 +51,11 @@ class EditarVacante extends Component
         $datos = $this->validate();
 
         //Si hay una nueva imagen
-
+        if($this->imagen_nueva)
+        {
+            $imagen = $this->imagen_nueva->store('public/vacantes');
+            $datos['imagen'] = str_replace('public/vacantes/', '', $imagen);
+        }
 
         //Encntrar la vacante a editar
         $vacante = Vacante::find($this->vacante_id);
@@ -60,6 +68,7 @@ class EditarVacante extends Component
         $vacante->ultimo_dia = $datos['ultimo_dia'];
         $vacante->categoria_id = $datos['categoria'];
         $vacante->descripcion = $datos['descripcion'];
+        $vacante->imagen = $datos['imagen'] ?? $vacante->image;
         
         //Guardar la vacante
         $vacante->save();
