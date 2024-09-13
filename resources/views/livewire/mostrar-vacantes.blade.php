@@ -25,10 +25,10 @@
                             href="{{ route('vacantes.edit', $vacante->id) }}"
                             class="bg-blue-600 py-2 px-4 rounded-lg text-white text-xs font-bold text-center uppercase"
                         >Editar</a>
-                        <a 
-                            wire:click="$dispatch('prueba',{ vacante_id: {{ $vacante->id }} } )"
+                        <button 
+                            wire:click="$dispatch('alertaEliminar', {{ $vacante->id }} )"
                             class="bg-red-600 py-2 px-4 rounded-lg text-white text-xs font-bold text-center uppercase"
-                        >Eliminar</a>
+                        >Eliminar</button>
                     </div>
 
                 </div>
@@ -49,30 +49,35 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+
     document.addEventListener('livewire:init', () => {
-        Livewire.on('prueba', vacanteId => {
-            alert('Eliminar vacante ' + vacanteId)
+        Livewire.on('alertaEliminar', vacante_id => {
+                Swal.fire({
+            title: "¿Eliminar Vacante? ",
+            text: "Una vacante eliminada no se puede recuperar",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, ¡Eliminar!",
+            cancelButtonText: "Cancelar"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                //eliminar la vacante
+                // $wire.dispatch('eliminarVacante');
+                Livewire.dispatch('eliminarVacante', {id:vacante_id});
+
+                Swal.fire({
+                title: "Se eliminó la Vacante",
+                text: "Eliminado Correctamente",
+                icon: "success"
+                });
+                }
+            });
        });
     });
 
-        // Swal.fire({
-        // title: "¿Eliminar Vacante?",
-        // text: "Una vacante eliminada no se puede recuperar",
-        // icon: "warning",
-        // showCancelButton: true,
-        // confirmButtonColor: "#3085d6",
-        // cancelButtonColor: "#d33",
-        // confirmButtonText: "Si, ¡Eliminar!",
-        // cancelButtonText: "Cancelar"
-        // }).then((result) => {
-        // if (result.isConfirmed) {
-        //     Swal.fire({
-        //     title: "Deleted!",
-        //     text: "Your file has been deleted.",
-        //     icon: "success"
-        //     });
-        //     }
-        // });
+        
     </script>
 
 
