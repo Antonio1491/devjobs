@@ -11,5 +11,9 @@
                 accept=".pdf"
             />
         </div>
+
+        <x-primary-button class="my-5 dark:bg-lime-600 dark:text-white dark:hover:bg-lime-700 w-full justify-center">
+            {{ __('Postularme') }}
+        </x-primary-button>
     </form>
 </div>
