@@ -41,4 +41,12 @@
         </div>
     @endguest
 
+    {{-- No puede  --}}
+    @cannot('create', App\Models\Vacante::class)
+        <livewire:postular-vacante/>
+
+    @endcan
+
+   
+
 </div>
