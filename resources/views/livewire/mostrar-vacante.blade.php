@@ -43,7 +43,7 @@
 
     {{-- No puede  --}}
     @cannot('create', App\Models\Vacante::class)
-        <livewire:postular-vacante/>
+        <livewire:postular-vacante :vacante="$vacante"/>
 
     @endcan
 

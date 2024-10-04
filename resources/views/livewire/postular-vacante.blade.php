@@ -3,7 +3,7 @@
 
     <form class="w-96 mt-5" wire:submit.prevent='postularme'>
         <div class="mb-4">
-            <x-input-label for="cv" :value="__('Curriculum o Hoja de Vida')" />
+            <x-input-label for="cv" :value="__('Curriculum o Hoja de Vida (PDF)')" />
             <x-text-input 
                 id="cv" 
                 class="block mt-1 w-full" 
