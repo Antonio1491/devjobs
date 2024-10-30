@@ -40,6 +40,9 @@ class Vacante extends Model
         return $this->hasMany(Candidato::class);
     }
 
+    //No existe el modelo reclutador 
+    //Una vacante pertenece a un usuario
+    //Especificamos que hacemos referencia al user_id de quién creo la vacante
     public function reclutador()
     {
         return $this->belongsTo(User::class, 'user_id');

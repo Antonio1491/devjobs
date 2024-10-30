@@ -45,7 +45,7 @@ class NuevoCandidato extends Notification
                     ->line('Gracias por utilizar Devjobs');
     }
 
-    // Almacenalas notificaciones en la bds
+    // Almacena las notificaciones en la bds en formato objeto
     public function toDatabase($notifiable)
     {
         return [
