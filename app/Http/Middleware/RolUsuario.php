@@ -15,6 +15,13 @@ class RolUsuario
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+        if(auth()->user()->rol === 1)
+        {
+            //En caso de que no sea el rol 2, redireccionar al usuario hacia home
+            return redirect()->route('home');
+        }
+
         return $next($request);
     }
 }
