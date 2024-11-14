@@ -13,22 +13,50 @@ class Homevacantes extends Component
 
     protected $listeners = ['terminosBusqueda' => 'buscar'];
 
-    public function buscar( $termino, $categoria, $salario)
+    public function buscar($termino, $categoria, $salario)
     {
         $this->termino = $termino;
-        $this->termino = $categoria;
-        $this->termino = $salario;
+        $this->categoria = $categoria;
+        $this->salario = $salario;
 
-        dd($this->termino);
     }
 
     public function render()
     {
 
-        $vacantes = Vacante::all();
+        // $vacantes = Vacante::all();
+
+        //Se ejecuta si los valores tienen algo, de lo contrario no se ejecuta (when)
+
+        $vacantes = Vacante::when($this->termino, function($query)
+        {
+            $query->where('titulo', 'LIKE', "%" . $this->termino . "%");
+        })
+        ->when($this->termino, function($query)
+        {
+            $query-> orWhere('empresa', 'LIKE', "%" . $this->termino . "%");
+        })
+        ->when($this->categoria, function($query)
+        {
+            $query->where('categoria_id', $this->categoria);
+        })
+        ->when($this->salario, function($query)
+        {
+            $query->where('salario_id', $this->salario);
+        })
+        ->get();
 
         return view('livewire.home-vacantes',[
             'vacantes' => $vacantes
         ]);
     }
 }
+
+// ->when($this->categoria, function($query)
+// {
+//     $query->where('categoria_id', $this->categoria);
+// })
+// ->when($this->salario, function($query)
+// {
+//     $query->where('salario_id', $this->salario);
+// })

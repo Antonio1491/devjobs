@@ -3,7 +3,7 @@
 
     <div class="max-w-7xl mx-auto">
         <form
-        wire:submit.prevent="leerDatosFormulario">
+        wire:submit="leerDatosFormulario">
             <div class="md:grid md:grid-cols-3 gap-5">
                 <div class="mb-5">
                     <label 
